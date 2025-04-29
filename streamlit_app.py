@@ -213,6 +213,8 @@ def Show_Main_Screen():
                 prediction = response.json()["Predicted Calories"][0]
                 st.success(f"🔥 Estimated Calories Burned: {prediction:.2f}")
 
+                st.session_state.calories_burned = prediction
+
                 if prediction < 50:
                     st.info("Your workout was light. Try to add a few more minutes next time for better results.")
                 elif 50 <= prediction <= 150:
