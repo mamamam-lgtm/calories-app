@@ -79,6 +79,8 @@ def Show_Sign_Up_Screen():
     if st.button("Register"):
         if not username or not password or not password_confirm:
             st.warning("Please fill in all fields.")
+        elif len(username) < 6:
+            st.error("Username must be at least 6 characters long.")
         elif password != password_confirm:
             st.error("Passwords do not match.")
         else:
