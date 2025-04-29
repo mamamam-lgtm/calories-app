@@ -214,13 +214,13 @@ def Show_Main_Screen():
                 st.success(f"🔥 Estimated Calories Burned: {prediction:.2f}")
 
                 if prediction < 50:
-                    st.info("Your workout was light. Try to add a few more minutes next time for better results.")
+                    st.info("Your workout was light. Try to add a few more minutes next time to achieve more calorie burn.")
                 elif 50 <= prediction <= 150:
-                   st.success("Good effort! You had a steady workout. Keep it up.")
+                   st.success("Good effort! You had a steady workout. Aim for a slightly higher intensity next time.")
                 elif 151 < prediction <= 250:
-                    st.success("Great job! That's a solid calorie burn. Stay consistent!")
+                    st.success("Well done! That's a solid calorie burn. Stay consistent!")
                 else:
-                    st.success("Amazing! That was a long session, you're definitely making progress.")
+                    st.success("Amazing! That was a long session, you're definitely making progress. Keep up the momentum!")
 
                 # Save to database
                 c.execute('''
