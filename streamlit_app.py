@@ -81,6 +81,8 @@ def Show_Sign_Up_Screen():
             st.warning("Please fill in all fields.")
         elif len(username) < 6:
             st.error("Username must be at least 6 characters long.")
+        elif len(password) < 6:
+            st.error("Password must be at least 6 characters long.")
         elif password != password_confirm:
             st.error("Passwords do not match.")
         else:
@@ -211,11 +213,11 @@ def Show_Main_Screen():
                 prediction = response.json()["Predicted Calories"][0]
                 st.success(f"🔥 Estimated Calories Burned: {prediction:.2f}")
 
-                if prediction < 100:
+                if prediction < 50:
                     st.info("Your workout was light. Try to add a few more minutes next time for better results.")
-                elif 100 <= prediction <= 300:
+                elif 50 <= prediction <= 150:
                    st.success("Good effort! You had a steady workout. Keep it up.")
-                elif 300 < prediction <= 600:
+                elif 151 < prediction <= 250:
                     st.success("Great job! That's a solid calorie burn. Stay consistent!")
                 else:
                     st.success("Amazing! That was a long session, you're definitely making progress.")
@@ -235,6 +237,10 @@ def Show_Main_Screen():
     if st.checkbox("📜 Show Prediction History"):
         st.subheader("Prediction History")
 
+        if "calories_burned" in st.session_state:
+            st.write(f"Current Prediction: {st.session_state.calories_burned:.2f} calories")
+
+
         c.execute('''
             SELECT gender, age, height, weight, duration, heart_rate, body_temp, calories_burned
             FROM history WHERE username = ?
@@ -246,7 +252,6 @@ def Show_Main_Screen():
             st.dataframe(df)
         else:
             st.info("No history found yet.")
-
 
 
     if st.checkbox("Show Calories vs Duration Graph"):
