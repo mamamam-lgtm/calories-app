@@ -211,6 +211,15 @@ def Show_Main_Screen():
                 prediction = response.json()["Predicted Calories"][0]
                 st.success(f"🔥 Estimated Calories Burned: {prediction:.2f}")
 
+                if prediction < 100:
+                    st.info("Your workout was light. Try to add a few more minutes next time for better results.")
+                elif 100 <= prediction <= 300:
+                   st.success("Good effort! You had a steady workout. Keep it up.")
+                elif 300 < prediction <= 600:
+                    st.success("Great job! That's a solid calorie burn. Stay consistent!")
+                else:
+                    st.success("Amazing! That was a long session, you're definitely making progress.")
+
                 # Save to database
                 c.execute('''
                     INSERT INTO history (username, gender, age, height, weight, duration, heart_rate, body_temp, calories_burned)
