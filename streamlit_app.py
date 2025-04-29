@@ -213,8 +213,6 @@ def Show_Main_Screen():
                 prediction = response.json()["Predicted Calories"][0]
                 st.success(f"🔥 Estimated Calories Burned: {prediction:.2f}")
 
-                st.session_state.calories_burned = prediction
-
                 if prediction < 50:
                     st.info("Your workout was light. Try to add a few more minutes next time for better results.")
                 elif 50 <= prediction <= 150:
@@ -238,10 +236,6 @@ def Show_Main_Screen():
         # Show history
     if st.checkbox("📜 Show Prediction History"):
         st.subheader("Prediction History")
-
-        if "calories_burned" in st.session_state:
-            st.write(f"Current Prediction: {st.session_state.calories_burned:.2f} calories")
-
 
         c.execute('''
             SELECT gender, age, height, weight, duration, heart_rate, body_temp, calories_burned
